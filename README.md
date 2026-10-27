@@ -38,7 +38,7 @@ V881MX-XXX 对应镜像输出：`out/v881mx-xxx_linux_DshanPi_mCoreB_V881_5D8E_u
 | 路径 | 用途 |
 | --- | --- |
 | device/config/chips/v861/configs/DshanPi_mCoreB_V881_5D8E | DDR/eMMC、纯 PMC 电源控制、内核及 U-Boot 设备树、分区、环境变量、quick_config |
-| openwrt/target/v861/DshanPi_mCoreB_V881_5D8E | lunch 注册、OpenWrt 配置、板级文件与启动脚本 |
+| openwrt/target/v861/v861-DshanPi_mCoreB_V881_5D8E | lunch 注册、OpenWrt 配置、板级文件与启动脚本 |
 | rtos/board/v861_e907/DshanPi_mCoreB_V881_5D8E | RTOS 板级配置 |
 | rtos/lichee/rtos/projects/v861_e907/DshanPi_mCoreB_V881_5D8E | 配套 RTOS 工程与 defconfig |
 | rtos/lichee/rtos/projects/Kconfig | 本板型 RTOS 配置项注册 |
@@ -54,20 +54,13 @@ board.dts 是指向 linux-6.6-xuantie/board.dts 的相对符号链接，请在 L
 
 2026-10-27 导出自已通过 Lynx 烧录校验和启动测试的新板型配置；本次仅复制并核对配置，没有重新构建或烧录。
 
-## OpenWrt 目录名称与兼容链接
+## OpenWrt 目录名称
 
-实际文件目录为 `openwrt/target/v861/DshanPi_mCoreB_V881_5D8E/`。
-同时保留相对符号链接：
+实际文件目录为 `openwrt/target/v861/v861-DshanPi_mCoreB_V881_5D8E/`，与其他原厂工程保持相同的 `v861-` 前缀。
+该路径是实目录，不再使用兼容符号链接，也不再保留不带前缀的板级目录。
+Makefile 的 BOARD、CONFIG_TARGET 和 lunch 入口保持原厂命名；SDK 构建脚本和板级参数未修改。
 
-```text
-openwrt/target/v861/v861-DshanPi_mCoreB_V881_5D8E -> DshanPi_mCoreB_V881_5D8E
-```
-
-这是原厂 SDK 查找板型配置所需的兼容入口，不是第二份文件。
-`cp -a` 会保留该链接；Makefile 的 BOARD、CONFIG_TARGET 和 lunch 命令仍使用原厂平台标识 `v861-`。
-没有修改原厂 SDK 构建脚本、PL1/PMC 或 DDR/eMMC 参数。
-
-GitHub 仓库：`dshanpi/DshanPi_mCoreB_V881_5D8E-tina`。
+GitHub 仓库仍为 `dshanpi/DshanPi_mCoreB_V881_5D8E-tina`。
 已验证固件备份位于[Releases 页面](https://github.com/dshanpi/DshanPi_mCoreB_V881_5D8E-tina/releases)，发布包附带 SHA-256；配置仓库不加入 .img 编译产物。
 
-从旧版本升级时，如 SDK 中旧名称仍是实目录，应先将其移出 target 树备份，再复制本版本；首次覆盖到原厂 SDK 则直接使用上面的 cp -a 命令。
+从之前的“无前缀实目录＋兼容链接”版本升级时，先备份并替换旧目录结构，再复制本版本；首次覆盖到原厂 SDK 可直接使用上面的 cp -a 命令。
