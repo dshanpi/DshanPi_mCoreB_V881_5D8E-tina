@@ -1,0 +1,77 @@
+{
+    "sdk_config": {
+        "ic": "v861",
+        "linux_dev": "openwrt",
+        "lunch_args": [
+            "V881",
+            "MX-XXX",
+            "0.92V"
+        ]
+    },
+    "config_lists": [
+        [],
+        [
+            "system_set_to_rv32i_musl"
+        ],
+        [
+            "system_set_to_rv32i_glibc"
+        ],
+        [
+            "system_set_to_rv64i_musl"
+        ],
+        [
+            "system_set_to_rv64i_glibc"
+        ],
+        [
+            "system_set_to_rv64ilp32_musl"
+        ],
+        [
+            "system_set_to_rv64ilp32_glibc"
+        ],
+        [
+            [
+                "system_set_to_rv32i_musl",
+                "system_set_to_rv32i_glibc",
+                "system_set_to_rv64i_musl",
+                "system_set_to_rv64i_glibc"
+            ],
+            [
+                "mpp_compile_static_lib",
+                "mpp_compile_dynamic_lib"
+            ],
+            [
+                "enable_all_eyesee_mpp_test_samples",
+                "awcdr_app"
+            ]
+        ],
+        [
+            "change_to_emmc"
+        ],
+        [
+            "change_to_spi_nand_squashfs"
+        ],
+        [
+            "change_to_spi_nand_ubifs"
+        ],
+        [
+            "change_to_spif_nand_squashfs"
+        ],
+        [
+            "change_to_spif_nand_ubifs"
+        ],
+        [
+            "pmu_set_to_dcdc_no_pmc"
+        ],
+        [
+            "pmu_set_to_pmc_pl0",
+            "pmu_set_to_pmc_pl1"
+        ],
+        [
+            "disable_rgb_drm_config"
+        ]
+    ],
+    "build_options": {
+        "parallel_jobs": 96,
+        "auto_resize_on_pack_failure": true
+    }
+}

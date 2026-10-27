@@ -1,0 +1,111 @@
+choice
+    prompt "Configure Application"
+    default PROJECT_V861_E907_BGA_PERF1
+
+config PROJECT_V861_E907_BGA_PERF1
+	bool "v861 e907 bga_perf1 system"
+	select PROJECT_V861_E907
+	---help---
+		v861 e907 bga_perf1 system
+
+config PROJECT_V861_E907_PERF1
+    bool "v861_e907 perf1 system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 perf1 system
+
+config PROJECT_V861_E907_IPC
+    bool "v861_e907 ipc system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 ipc system
+
+config PROJECT_V861_E907_PERF2
+    bool "v861_e907 perf2 system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 perf2 system
+
+config PROJECT_V861_E907_PERF2_FASTBOOT
+    bool "v861_e907 perf2_fastboot system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 perf2_fastboot system
+
+config PROJECT_V861_E907_AOV
+    bool "v861_e907 aov system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 aov system
+
+config PROJECT_V861_E907_AIGLASS
+    bool "v861_e907 aiglass system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 perf2_aiglass system
+
+config PROJECT_V861_E907_STANDBY
+    bool "v861_e907 min system for standby"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 min system for standby
+
+config PROJECT_V861_E907_SC1771V
+    bool "v861_e907 sc1771v system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 sc1771v system
+
+config PROJECT_V861_E907_CDR
+    bool "v861_e907 cdr system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 cdr system
+
+config PROJECT_V861_E907_HMI
+    bool "v861_e907 hmi system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 hmi system
+
+config PROJECT_V861_E907_SDV
+    bool "v861_e907 sdv system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 sdv system
+
+config PROJECT_V861_E907_AIGLASS_SC1770V
+    bool "v861_e907 aiglass_sc1770v system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 aiglass_sc1770v system
+
+config PROJECT_V861_E907_AVAOTA_F2
+    bool "v861_e907 avaota_f2 system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 avaota_f2 system
+
+config PROJECT_V861_E907_DSHANPI_MCOREB_V881_5D8E
+    bool "v861_e907 DshanPi_mCoreB_V881_5D8E system"
+    select PROJECT_V861_E907
+    ---help---
+        the v861_e907 DshanPi_mCoreB_V881_5D8E system
+
+endchoice
+
+config PROJECT_V861_E907
+    bool
+
+config FPGA_PLATFORM
+    bool "Run on fpga"
+    default n
+
+config PROJECT_TESTCASE
+    bool "Project Testcase"
+    default n
+
+config NON_OS
+    bool "non os demo"
+    default n
+    depends on PROJECT_T113_S3P_C906_EVB1_AUTO_NON_OS

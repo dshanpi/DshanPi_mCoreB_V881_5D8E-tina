@@ -1,0 +1,1750 @@
+{
+    "use_common_conifg": true,
+    "quick_config_include": [
+        "dram_param.json",
+        "standby.json",
+        "sensor.json",
+        "rtos_config.json",
+        "storage_change.json"
+    ],
+    "remove_rtos_support_and_disable_cpus": {
+        "desc": "Disable rtos support and disable cpus boot up",
+        "tag": "rtos",
+        "depends": [
+            "remove_rtos_support_and_disable_cpus_base"
+        ]
+    },
+    "default_one_sensor_config": {
+        "desc": "set to default one camera config (gc4663) for this board",
+        "internal": true,
+        "depends": [
+            "default_sensor_sys_config",
+            "default_sensor_board_dts_config"
+        ],
+        "board.dts": {
+            "set_property": {
+                "size_pool_mem": {
+                    "size": "<0x0 0x3200000>"
+                },
+                "size_pool@0": {
+                    "thrs": "<128>",
+                    "sizes": "<0 51200>"
+                },
+                "vind0": {
+                    "csi_top": "<300000000>"
+                },
+                "sensor0": {
+                    "device_type": "\"sensor0\"",
+                    "sensor0_mname": "\"gc4663_mipi\"",
+                    "sensor0_twi_cci_id": "<1>",
+                    "sensor0_twi_addr": "<0x52>",
+                    "sensor0_mclk_id": "<0>",
+                    "sensor0_pos": "\"rear\"",
+                    "sensor0_isp_used": "<1>",
+                    "sensor0_fmt": "<1>",
+                    "sensor0_stby_mode": "<0>",
+                    "sensor0_vflip": "<0>",
+                    "sensor0_hflip": "<0>",
+                    "sensor0_iovdd-supply": "<>",
+                    "sensor0_iovdd_vol": "<>",
+                    "sensor0_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor0_avdd_vol": "<2800000>",
+                    "sensor0_dvdd-supply": "<>",
+                    "sensor0_dvdd_vol": "<>",
+                    "sensor0_power_en": "<>",
+                    "sensor0_pwdn": "<&pio PH 9 GPIO_ACTIVE_LOW>",
+                    "sensor0_reset": "<&pio PA 18 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "sensor1": {
+                    "device_type": "\"sensor1\"",
+                    "status": "\"disabled\""
+                },
+                "sensor2": {
+                    "device_type": "\"sensor2\"",
+                    "status": "\"disabled\""
+                }
+            }
+        }
+    },
+    "default_one_dvp_sensor_config": {
+        "desc": "set to default one dvp camera config (os02g10) for this board",
+        "internal": true,
+        "depends": [
+            "default_sensor_sys_config",
+            "default_sensor_board_dts_config"
+        ],
+        "board.dts": {
+            "add_node": [
+                {
+                    "name": "&csi_mclk2_pins_a",
+                    "add_tail": 1
+                },
+                {
+                    "name": "&csi_mclk2_pins_b",
+                    "add_tail": 1
+                },
+                {
+                    "name": "&ncsi_16bit_pins_a",
+                    "add_tail": 1
+                },
+                {
+                    "name": "&ncsi_16bit_pins_b",
+                    "add_tail": 1
+                }
+            ],
+            "set_property": {
+                "rfkill": {
+                    "status": "\"disabled\""
+                },
+                "i2s0_mach": {
+                    "status": "\"disabled\""
+                },
+                "codec_mach": {
+                    "status": "\"disabled\""
+                },
+                "twi2_pins_default": {
+                    "pins": "\"PE16\", \"PE17\""
+                },
+                "twi2_pins_sleep": {
+                    "pins": "\"PE16\", \"PE17\""
+                },
+                "twi2": {
+                    "status": "\"okay\""
+                },
+                "i2s0_plat": {
+                    "pinctrl-names": "\"\"",
+                    "pinctrl-0": "<>",
+                    "pinctrl-1": "<>"
+                },
+                "gmac_pins_a": {
+                    "pins": "\"\""
+                },
+                "gmac_pins_b": {
+                    "pins": "\"\""
+                },
+                "ncsi_16bit_pins_a": {
+                    "pins": "\"PE0\", \"PE2\", \"PE3\", \"PE4\", \"PE5\", \"PE6\", \"PE7\", \"PE8\", \"PE9\", \"PE10\", \"PE10\", \"PE12\", \"PE13\", \"PE14\", \"PE15\"",
+                    "function": "\"ncsi\""
+                },
+                "ncsi_16bit_pins_b": {
+                    "pins": "\"PE0\", \"PE2\", \"PE3\", \"PE4\", \"PE5\", \"PE6\", \"PE7\", \"PE8\", \"PE9\", \"PE10\", \"PE10\", \"PE12\", \"PE13\", \"PE14\", \"PE15\"",
+                    "function": "\"gpio_in\""
+                },
+                "size_pool_mem": {
+                    "size": "<0x0 0x3200000>"
+                },
+                "size_pool@0": {
+                    "thrs": "<128>",
+                    "sizes": "<0 51200>"
+                },
+                "vind0": {
+                    "csi_top": "<340000000>"
+                },
+                "csi_mclk2_pins_a": {
+                    "pins": "\"PE1\"",
+                    "function": "\"ncsi\""
+                },
+                "csi_mclk2_pins_b": {
+                    "pins": "\"PE1\"",
+                    "function": "\"gpio_in\""
+                },
+                "csi2": {
+                    "pinctrl-0": "<&ncsi_16bit_pins_a>",
+                    "pinctrl-1": "<&ncsi_16bit_pins_b>",
+                    "status": "\"okay\""
+                },
+                "tdm0": {
+                    "work_mode": "<0x1>"
+                },
+                "isp00": {
+                    "work_mode": "<0x1>"
+                },
+                "isp01": {
+                    "status": "\"okay\"",
+                    "ldci_select": "<0x1>"
+                },
+                "isp10": {
+                    "status": "\"okay\""
+                },
+                "scaler00": {
+                    "work_mode": "<0x1>"
+                },
+                "scaler01": {
+                    "status": "\"okay\""
+                },
+                "scaler10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler11": {
+                    "status": "\"okay\""
+                },
+                "sensor0": {
+                    "sensor0_mname": "\"os02g10_dvp\"",
+                    "sensor0_twi_addr": "<0x78>",
+                    "sensor0_mclk_id": "<2>",
+                    "sensor0_reset": "<&pio PH 3 GPIO_ACTIVE_LOW>",
+                    "sensor0_pwdn": "<&pio PH 4 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "vinc00": {
+                    "vinc0_csi_sel": "<2>",
+                    "vinc0_mipi_sel": "<0xff>",
+                    "work_mode": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "vinc10": {
+                    "vinc4_csi_sel": "<2>",
+                    "vinc4_mipi_sel": "<0xff>",
+                    "work_mode": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "gmac0": {
+                    "pinctrl-names": "\"\"",
+                    "pinctrl-0": "<>",
+                    "pinctrl-1": "<>"
+                }
+            },
+            "kernel": [
+                "CONFIG_SUPPORT_ISP_TDM=y",
+                "CONFIG_TDM_LBC_EN=y",
+                "CONFIG_SENSOR_OS02G10_DVP=m",
+                "# CONFIG_SENSOR_GC4663 is not set"
+            ],
+            "openwrt": [
+                "CONFIG_PACKAGE_kmod-sensor-os02g10=y",
+                "CONFIG_os02g10=y",
+                "# CONFIG_PACKAGE_kmod-sensor-gc4663 is not set",
+                "# CONFIG_gc4663 is not set"
+            ]
+        }
+    },
+    "default_one_ahd_sensor_config": {
+        "desc": "set to default one ahd camera config (tp2815) for this board",
+        "board.dts": {
+            "set_property": {
+                "size_pool_mem": {
+                    "size": "<0x0 0xc800000>"
+                },
+                "size_pool@0": {
+                    "sizes": "<0 204800>"
+                },
+                "vind0": {
+                    "csi_top": "<324000000>"
+                },
+                "tdm0": {
+                    "work_mode": "<0x1>"
+                },
+                "isp00": {
+                    "work_mode": "<0x1>"
+                },
+                "isp01": {
+                    "status": "\"okay\""
+                },
+                "scaler00": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler01": {
+                    "status": "\"okay\""
+                },
+                "scaler10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler11": {
+                    "status": "\"okay\""
+                },
+                "scaler20": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler21": {
+                    "status": "\"okay\""
+                },
+                "scaler30": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler31": {
+                    "status": "\"okay\""
+                },
+                "sensor0": {
+                    "sensor0_mname": "\"tp2815_mipi\"",
+                    "sensor0_twi_addr": "<0x88>",
+                    "sensor0_reset": "<&pio PK 18 GPIO_ACTIVE_LOW>",
+                    "sensor0_pwdn": "<&pio PH 9 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "vinc00": {
+                    "vinc0_isp_sel": "<0x4>",
+                    "status": "\"okay\""
+                },
+                "vinc10": {
+                    "vinc4_tdm_rx_sel": "<0x4>",
+                    "status": "\"okay\""
+                }
+            }
+        }
+    },
+    "default_one_2in1_sensor_config": {
+        "desc": "set to default one 2in1 camera config (gc8613) for this board",
+        "internal": true,
+        "depends": [
+            "default_one_sensor_config"
+        ],
+        "board.dts": {
+            "set_property": {
+                "size_pool_mem": {
+                    "size": "<0x0 0xc800000>"
+                },
+                "size_pool@0": {
+                    "sizes": "<0 204800>"
+                },
+                "vind0": {
+                    "csi_top": "<390000000>"
+                },
+                "tdm0": {
+                    "work_mode": "<0x1>"
+                },
+                "isp00": {
+                    "work_mode": "<0x1>"
+                },
+                "isp01": {
+                    "status": "\"okay\""
+                },
+                "scaler00": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler01": {
+                    "status": "\"okay\""
+                },
+                "scaler10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler11": {
+                    "status": "\"okay\""
+                },
+                "scaler20": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler21": {
+                    "status": "\"okay\""
+                },
+                "scaler30": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler31": {
+                    "status": "\"okay\""
+                },
+                "sensor0": {
+                    "sensor0_mname": "\"gc8613_mipi\"",
+                    "sensor0_twi_addr": "<0x62>",
+                    "status": "\"okay\""
+                },
+                "vinc00": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc01": {
+                    "vinc1_csi_sel": "<0x0>",
+                    "vinc1_mipi_sel": "<0x0>",
+                    "vinc1_rear_sensor_sel": "<0x0>",
+                    "vinc1_front_sensor_sel": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "vinc10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc11": {
+                    "vinc5_csi_sel": "<0x0>",
+                    "vinc5_mipi_sel": "<0x0>",
+                    "vinc5_rear_sensor_sel": "<0x0>",
+                    "vinc5_front_sensor_sel": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "vinc20": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc21": {
+                    "vinc9_csi_sel": "<0x0>",
+                    "vinc9_mipi_sel": "<0x0>",
+                    "vinc9_rear_sensor_sel": "<0x0>",
+                    "vinc9_front_sensor_sel": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "vinc30": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc31": {
+                    "vinc13_csi_sel": "<0x0>",
+                    "vinc13_mipi_sel": "<0x0>",
+                    "vinc13_rear_sensor_sel": "<0x0>",
+                    "vinc13_front_sensor_sel": "<0x0>",
+                    "status": "\"okay\""
+                }
+            }
+        },
+        "kernel": [
+            "CONFIG_SUPPORT_ISP_TDM=y",
+            "CONFIG_TDM_LBC_EN=y",
+            "CONFIG_SENSOR_GC8613=m",
+            "# CONFIG_SENSOR_GC4663 is not set"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_kmod-sunxi-vin=y",
+            "CONFIG_PACKAGE_kmod-sensor-gc8613=y",
+            "CONFIG_gc8613=y",
+            "# CONFIG_PACKAGE_kmod-sensor-gc4663 is not set",
+            "# CONFIG_gc4663 is not set"
+        ]
+    },
+    "default_dual_sensor_config": {
+        "desc": "set to default dual camera config (gc2083) for this board",
+        "internal": true,
+        "depends": [
+            "default_one_sensor_config"
+        ],
+        "board.dts": {
+            "set_property": {
+                "size_pool_mem": {
+                    "size": "<0x0 0x3200000>"
+                },
+                "size_pool@0": {
+                    "thrs": "<128>",
+                    "sizes": "<0 51200>"
+                },
+                "tdm0": {
+                    "work_mode": "<0x1>",
+                    "delay_init": "<0>"
+                },
+                "isp00": {
+                    "work_mode": "<0x1>",
+                    "delay_init": "<0>"
+                },
+                "isp01": {
+                    "status": "\"okay\"",
+                    "delay_init": "<0>"
+                },
+                "isp02": {
+                    "status": "\"disabled\""
+                },
+                "isp03": {
+                    "status": "\"disabled\""
+                },
+                "scaler00": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\"",
+                    "delay_init": "<0>"
+                },
+                "scaler01": {
+                    "status": "\"okay\"",
+                    "delay_init": "<0>"
+                },
+                "scaler10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler11": {
+                    "status": "\"okay\""
+                },
+                "scaler20": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler21": {
+                    "status": "\"okay\""
+                },
+                "scaler30": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler31": {
+                    "status": "\"okay\""
+                },
+                "sensor0": {
+                    "sensor0_mname": "\"gc2083_mipi\"",
+                    "sensor0_twi_cci_id": "<1>",
+                    "sensor0_twi_addr": "<0x6e>",
+                    "sensor0_mclk_id": "<0>",
+                    "sensor0_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor0_avdd_vol": "<2800000>",
+                    "sensor0_pwdn": "<&pio PH 9 GPIO_ACTIVE_LOW>",
+                    "sensor0_reset": "<&pio PA 18 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "sensor1": {
+                    "sensor1_mname": "\"gc2083_mipi_2\"",
+                    "sensor1_twi_cci_id": "<1>",
+                    "sensor1_twi_addr": "<0x7e>",
+                    "sensor1_mclk_id": "<1>",
+                    "sensor1_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor1_avdd_vol": "<2800000>",
+                    "sensor1_pwdn": "<&pio PH 10 GPIO_ACTIVE_LOW>",
+                    "sensor1_reset": "<&pio PA 19 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "vinc00": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc01": {
+                    "vinc1_csi_sel": "<1>",
+                    "vinc1_mipi_sel": "<1>",
+                    "vinc1_isp_sel": "<1>",
+                    "vinc1_isp_tx_ch": "<0>",
+                    "vinc1_tdm_rx_sel": "<1>",
+                    "vinc1_vipp_sel": "<1>",
+                    "vinc1_rear_sensor_sel": "<1>",
+                    "vinc1_front_sensor_sel": "<1>",
+                    "vinc1_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc11": {
+                    "vinc5_csi_sel": "<1>",
+                    "vinc5_mipi_sel": "<1>",
+                    "vinc5_isp_sel": "<1>",
+                    "vinc5_isp_tx_ch": "<0>",
+                    "vinc5_tdm_rx_sel": "<1>",
+                    "vinc5_vipp_sel": "<5>",
+                    "vinc5_rear_sensor_sel": "<1>",
+                    "vinc5_front_sensor_sel": "<1>",
+                    "vinc5_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc20": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc21": {
+                    "vinc9_csi_sel": "<1>",
+                    "vinc9_mipi_sel": "<1>",
+                    "vinc9_isp_sel": "<1>",
+                    "vinc9_isp_tx_ch": "<0>",
+                    "vinc9_tdm_rx_sel": "<1>",
+                    "vinc9_vipp_sel": "<9>",
+                    "vinc9_rear_sensor_sel": "<1>",
+                    "vinc9_front_sensor_sel": "<1>",
+                    "vinc9_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc30": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc31": {
+                    "vinc13_csi_sel": "<1>",
+                    "vinc13_mipi_sel": "<1>",
+                    "vinc13_isp_sel": "<1>",
+                    "vinc13_isp_tx_ch": "<0>",
+                    "vinc13_tdm_rx_sel": "<1>",
+                    "vinc13_vipp_sel": "<13>",
+                    "vinc13_rear_sensor_sel": "<1>",
+                    "vinc13_front_sensor_sel": "<1>",
+                    "vinc13_sensor_list": "<0>",
+                    "status": "\"okay\""
+                }
+            }
+        },
+        "kernel": [
+            "CONFIG_SUPPORT_ISP_TDM=y",
+            "CONFIG_TDM_LBC_EN=y",
+            "CONFIG_D3D_COMPRESS_EN=y",
+            "CONFIG_SENSOR_GC2083_MIPI=m",
+            "CONFIG_SENSOR_GC2083_ONE_LANE_MIPI=y",
+            "# CONFIG_SENSOR_GC4663 is not set"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_kmod-sunxi-vin=y",
+            "CONFIG_PACKAGE_kmod-sensor-gc2083=y",
+            "# CONFIG_PACKAGE_kmod-sensor-gc4663 is not set",
+            "CONFIG_gc2083=y",
+            "# CONFIG_gc4663 is not set"
+        ]
+    },
+    "default_dual_2in1_sensor_config": {
+        "desc": "set to default dual 2in1 camera config (gc8613) for this board",
+        "internal": true,
+        "depends": [
+            "default_dual_sensor_config"
+        ],
+        "board.dts": {
+            "set_property": {
+                "size_pool_mem": {
+                    "size": "<0x0 0xc800000>"
+                },
+                "size_pool@0": {
+                    "thrs": "<128>",
+                    "sizes": "<0 204800>"
+                },
+                "vind0": {
+                    "csi_top": "<390000000>"
+                },
+                "tdm0": {
+                    "work_mode": "<0x1>"
+                },
+                "isp00": {
+                    "work_mode": "<0x1>"
+                },
+                "isp01": {
+                    "status": "\"okay\""
+                },
+                "isp02": {
+                    "status": "\"okay\""
+                },
+                "isp03": {
+                    "status": "\"okay\""
+                },
+                "scaler00": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler01": {
+                    "status": "\"okay\""
+                },
+                "scaler02": {
+                    "status": "\"okay\""
+                },
+                "scaler03": {
+                    "status": "\"okay\""
+                },
+                "scaler10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler11": {
+                    "status": "\"okay\""
+                },
+                "scaler12": {
+                    "status": "\"okay\""
+                },
+                "scaler13": {
+                    "status": "\"okay\""
+                },
+                "scaler20": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "scaler21": {
+                    "status": "\"okay\""
+                },
+                "scaler22": {
+                    "status": "\"okay\""
+                },
+                "scaler23": {
+                    "status": "\"okay\""
+                },
+                "sensor0": {
+                    "sensor0_mname": "\"gc8613_mipi\"",
+                    "sensor0_twi_addr": "<0x62>",
+                    "sensor0_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor0_avdd_vol": "<2800000>",
+                    "sensor0_pwdn": "<&pio PH 9 GPIO_ACTIVE_LOW>",
+                    "sensor0_reset": "<&pio PA 18 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "sensor1": {
+                    "sensor1_mname": "\"gc8613_mipi_2\"",
+                    "sensor1_twi_addr": "<0x20>",
+                    "sensor1_avdd-supply": "<>",
+                    "sensor1_avdd_vol": "<2800000>",
+                    "sensor1_pwdn": "<&pio PH 10 GPIO_ACTIVE_LOW>",
+                    "sensor1_reset": "<&pio PA 19 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "vinc00": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc01": {
+                    "vinc1_csi_sel": "<0x0>",
+                    "vinc1_mipi_sel": "<0x0>",
+                    "vinc1_rear_sensor_sel": "<0x0>",
+                    "vinc1_front_sensor_sel": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "vinc02": {
+                    "vinc2_csi_sel": "<0x1>",
+                    "vinc2_mipi_sel": "<0x1>",
+                    "vinc2_rear_sensor_sel": "<0x1>",
+                    "vinc2_front_sensor_sel": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc03": {
+                    "vinc3_csi_sel": "<0x1>",
+                    "vinc3_mipi_sel": "<0x1>",
+                    "vinc3_rear_sensor_sel": "<0x1>",
+                    "vinc3_front_sensor_sel": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc10": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc11": {
+                    "vinc5_csi_sel": "<0x0>",
+                    "vinc5_mipi_sel": "<0x0>",
+                    "vinc5_rear_sensor_sel": "<0x0>",
+                    "vinc5_front_sensor_sel": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "vinc12": {
+                    "status": "\"okay\"",
+                    "vinc6_csi_sel": "<0x01>",
+                    "vinc6_mipi_sel": "<0x01>",
+                    "vinc6_rear_sensor_sel": "<0x1>",
+                    "vinc6_front_sensor_sel": "<0x1>"
+                },
+                "vinc13": {
+                    "vinc7_csi_sel": "<0x01>",
+                    "vinc7_mipi_sel": "<0x01>",
+                    "vinc7_rear_sensor_sel": "<0x1>",
+                    "vinc7_front_sensor_sel": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc20": {
+                    "work_mode": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc21": {
+                    "vinc9_csi_sel": "<0x0>",
+                    "vinc9_mipi_sel": "<0x0>",
+                    "vinc9_rear_sensor_sel": "<0x0>",
+                    "vinc9_front_sensor_sel": "<0x0>",
+                    "status": "\"okay\""
+                },
+                "vinc22": {
+                    "vinc10_csi_sel": "<0x1>",
+                    "vinc10_mipi_sel": "<0x1>",
+                    "vinc10_isp_sel": "<0x2>",
+                    "vinc10_rear_sensor_sel": "<0x1>",
+                    "vinc10_front_sensor_sel": "<0x1>",
+                    "status": "\"okay\""
+                },
+                "vinc23": {
+                    "vinc11_csi_sel": "<0x1>",
+                    "vinc11_mipi_sel": "<0x1>",
+                    "vinc11_isp_sel": "<0x3>",
+                    "vinc11_rear_sensor_sel": "<0x1>",
+                    "vinc11_front_sensor_sel": "<0x1>",
+                    "status": "\"okay\""
+                }
+            }
+        },
+        "kernel": [
+            "CONFIG_SUPPORT_ISP_TDM=y",
+            "CONFIG_TDM_LBC_EN=y",
+            "CONFIG_SENSOR_GC8613=m",
+            "CONFIG_SENSOR_GC8613_TWO_LANE_MIPI=y",
+            "# CONFIG_SENSOR_GC2083_MIPI is not set"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_kmod-sunxi-vin=y",
+            "CONFIG_PACKAGE_kmod-sensor-gc8613=y",
+            "# CONFIG_PACKAGE_kmod-sensor-gc2083 is not set",
+            "CONFIG_gc8613=y",
+            "# CONFIG_gc2083 is not set"
+        ]
+    },
+    "default_three_sensor_config": {
+        "desc": "set to default three camera config (gc2083) for this board",
+        "internal": true,
+        "depends": [
+            "default_dual_sensor_config"
+        ],
+        "board.dts": {
+            "set_property": {
+                "csi2": {
+                    "pinctrl-names": "\"default\",\"sleep\"",
+                    "pinctrl-0": "<>",
+                    "pinctrl-1": "<>",
+                    "status": "\"okay\""
+                },
+                "isp02": {
+                    "status": "\"okay\""
+                },
+                "scaler02": {
+                    "status": "\"okay\""
+                },
+                "scaler12": {
+                    "status": "\"okay\""
+                },
+                "sensor0": {
+                    "sensor0_mname": "\"gc2083_mipi\"",
+                    "sensor0_twi_cci_id": "<1>",
+                    "sensor0_twi_addr": "<0x1e>",
+                    "sensor0_mclk_id": "<0>",
+                    "sensor0_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor0_avdd_vol": "<2800000>",
+                    "sensor0_pwdn": "<&pio PH 9 GPIO_ACTIVE_LOW>",
+                    "sensor0_reset": "<&pio PA 18 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "sensor1": {
+                    "device_type": "\"sensor1\"",
+                    "sensor1_mname": "\"gc2083_mipi_2\"",
+                    "sensor1_twi_cci_id": "<1>",
+                    "sensor1_twi_addr": "<0x6e>",
+                    "sensor1_mclk_id": "<1>",
+                    "sensor1_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor1_avdd_vol": "<2800000>",
+                    "sensor1_pwdn": "<&pio PH 10 GPIO_ACTIVE_LOW>",
+                    "sensor1_reset": "<&pio PA 19 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "sensor2": {
+                    "device_type": "\"sensor2\"",
+                    "sensor2_mname": "\"gc2083_mipi_3\"",
+                    "sensor2_twi_cci_id": "<1>",
+                    "sensor2_twi_addr": "<0x7e>",
+                    "sensor2_mclk_id": "<2>",
+                    "sensor2_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor2_avdd_vol": "<2800000>",
+                    "sensor2_pwdn": "<&pio PH 11 GPIO_ACTIVE_LOW>",
+                    "sensor2_reset": "<&pio PA 20 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "vinc02": {
+                    "vinc2_csi_sel": "<2>",
+                    "vinc2_mipi_sel": "<2>",
+                    "vinc2_isp_sel": "<2>",
+                    "vinc2_isp_tx_ch": "<0>",
+                    "vinc2_tdm_rx_sel": "<2>",
+                    "vinc2_vipp_sel": "<2>",
+                    "vinc2_rear_sensor_sel": "<2>",
+                    "vinc2_front_sensor_sel": "<2>",
+                    "vinc2_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc12": {
+                    "vinc6_csi_sel": "<2>",
+                    "vinc6_mipi_sel": "<2>",
+                    "vinc6_rear_sensor_sel": "<2>",
+                    "vinc6_front_sensor_sel": "<2>",
+                    "status": "\"okay\""
+                }
+            }
+        },
+        "kernel": [
+            "CONFIG_SUPPORT_ISP_TDM=y",
+            "CONFIG_TDM_LBC_EN=y",
+            "CONFIG_D3D_COMPRESS_EN=y",
+            "CONFIG_SENSOR_GC2083_MIPI=m",
+            "CONFIG_SENSOR_GC2083_MIPI_USE_SAME_TWI=y",
+            "CONFIG_TDM_ONE_BUFFER=y",
+            "CONFIG_SENSOR_GC2083_ONE_LANE_MIPI=y",
+            "CONFIG_FRAMEDONE_TWO_BUFFER=y",
+            "# CONFIG_SENSOR_GC4663 is not set"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_kmod-sunxi-vin=y",
+            "CONFIG_PACKAGE_kmod-sensor-gc2083=y",
+            "# CONFIG_PACKAGE_kmod-sensor-gc4663 is not set",
+            "CONFIG_gc2083=y",
+            "# CONFIG_gc4663 is not set"
+        ]
+    },
+    "default_four_sensor_config": {
+        "desc": "set to default four camera config (gc2083) for this board",
+        "internal": true,
+        "depends": [
+            "default_dual_sensor_config"
+        ],
+        "board.dts": {
+            "set_property": {
+                "size_pool_mem": {
+                    "size": "<0x0 0x6400000>"
+                },
+                "size_pool@0": {
+                    "sizes": "<0 102400>"
+                },
+                "csi2": {
+                    "pinctrl-names": "\"default\",\"sleep\"",
+                    "pinctrl-0": "<>",
+                    "pinctrl-1": "<>",
+                    "status": "\"okay\""
+                },
+                "isp02": {
+                    "status": "\"okay\""
+                },
+                "isp03": {
+                    "status": "\"okay\""
+                },
+                "scaler01": {
+                    "status": "\"okay\""
+                },
+                "scaler02": {
+                    "status": "\"okay\""
+                },
+                "scaler03": {
+                    "status": "\"okay\""
+                },
+                "scaler11": {
+                    "status": "\"okay\""
+                },
+                "scaler12": {
+                    "status": "\"okay\""
+                },
+                "scaler13": {
+                    "status": "\"okay\""
+                },
+                "scaler21": {
+                    "status": "\"okay\""
+                },
+                "scaler22": {
+                    "status": "\"okay\""
+                },
+                "scaler23": {
+                    "status": "\"okay\""
+                },
+                "sensor0": {
+                    "sensor0_mname": "\"gc2083_mipi\"",
+                    "sensor0_twi_cci_id": "<1>",
+                    "sensor0_twi_addr": "<0x1e>",
+                    "sensor0_mclk_id": "<0>",
+                    "sensor0_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor0_avdd_vol": "<2800000>",
+                    "sensor0_pwdn": "<&pio PH 9 GPIO_ACTIVE_LOW>",
+                    "sensor0_reset": "<&pio PA 18 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "sensor1": {
+                    "device_type": "\"sensor1\"",
+                    "sensor1_mname": "\"gc2083_mipi_2\"",
+                    "sensor1_twi_cci_id": "<1>",
+                    "sensor1_twi_addr": "<0x3e>",
+                    "sensor1_mclk_id": "<1>",
+                    "sensor1_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor1_avdd_vol": "<2800000>",
+                    "sensor1_pwdn": "<&pio PH 10 GPIO_ACTIVE_LOW>",
+                    "sensor1_reset": "<&pio PA 19 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "sensor2": {
+                    "device_type": "\"sensor2\"",
+                    "sensor2_mname": "\"gc2083_mipi_vc\"",
+                    "sensor2_twi_cci_id": "<1>",
+                    "sensor2_twi_addr": "<0x6e>",
+                    "sensor2_mclk_id": "<2>",
+                    "sensor2_avdd-supply": "<&reg_axp333_aldo1>",
+                    "sensor2_avdd_vol": "<2800000>",
+                    "sensor2_pwdn": "<&pio PH 11 GPIO_ACTIVE_LOW>",
+                    "sensor2_reset": "<&pio PA 20 GPIO_ACTIVE_LOW>",
+                    "sensor2_mipiswitch": "<&pio PA 21 GPIO_ACTIVE_LOW>",
+                    "status": "\"okay\""
+                },
+                "vinc02": {
+                    "vinc2_csi_sel": "<2>",
+                    "vinc2_mipi_sel": "<2>",
+                    "vinc2_csi_ch": "<0x10>",
+                    "vinc2_isp_sel": "<2>",
+                    "vinc2_isp_tx_ch": "<0>",
+                    "vinc2_tdm_rx_sel": "<2>",
+                    "vinc2_vipp_sel": "<2>",
+                    "vinc2_rear_sensor_sel": "<2>",
+                    "vinc2_front_sensor_sel": "<2>",
+                    "vinc2_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc03": {
+                    "vinc3_csi_sel": "<2>",
+                    "vinc3_mipi_sel": "<2>",
+                    "vinc3_csi_ch": "<0x11>",
+                    "vinc3_isp_sel": "<3>",
+                    "vinc3_isp_tx_ch": "<0>",
+                    "vinc3_tdm_rx_sel": "<3>",
+                    "vinc3_vipp_sel": "<3>",
+                    "vinc3_rear_sensor_sel": "<2>",
+                    "vinc3_front_sensor_sel": "<2>",
+                    "vinc3_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc12": {
+                    "vinc6_csi_sel": "<2>",
+                    "vinc6_mipi_sel": "<2>",
+                    "vinc6_csi_ch": "<0x10>",
+                    "vinc6_isp_sel": "<2>",
+                    "vinc6_isp_tx_ch": "<0>",
+                    "vinc6_tdm_rx_sel": "<2>",
+                    "vinc6_vipp_sel": "<6>",
+                    "vinc6_rear_sensor_sel": "<2>",
+                    "vinc6_front_sensor_sel": "<2>",
+                    "vinc6_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc13": {
+                    "vinc7_csi_sel": "<2>",
+                    "vinc7_mipi_sel": "<2>",
+                    "vinc7_csi_ch": "<0x11>",
+                    "vinc7_isp_sel": "<3>",
+                    "vinc7_isp_tx_ch": "<0>",
+                    "vinc7_tdm_rx_sel": "<3>",
+                    "vinc7_vipp_sel": "<7>",
+                    "vinc7_rear_sensor_sel": "<2>",
+                    "vinc7_front_sensor_sel": "<2>",
+                    "vinc7_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc20": {
+                    "status": "\"okay\""
+                },
+                "vinc22": {
+                    "vinc10_csi_sel": "<2>",
+                    "vinc10_mipi_sel": "<2>",
+                    "vinc10_csi_ch": "<0x10>",
+                    "vinc10_isp_sel": "<2>",
+                    "vinc10_isp_tx_ch": "<0>",
+                    "vinc10_tdm_rx_sel": "<2>",
+                    "vinc10_vipp_sel": "<10>",
+                    "vinc10_rear_sensor_sel": "<2>",
+                    "vinc10_front_sensor_sel": "<2>",
+                    "vinc10_sensor_list": "<0>",
+                    "status": "\"okay\""
+                },
+                "vinc23": {
+                    "vinc11_csi_sel": "<2>",
+                    "vinc11_mipi_sel": "<2>",
+                    "vinc11_csi_ch": "<0x11>",
+                    "vinc11_isp_sel": "<3>",
+                    "vinc11_isp_tx_ch": "<0>",
+                    "vinc11_tdm_rx_sel": "<3>",
+                    "vinc11_vipp_sel": "<11>",
+                    "vinc11_rear_sensor_sel": "<2>",
+                    "vinc11_front_sensor_sel": "<2>",
+                    "vinc11_sensor_list": "<0>",
+                    "status": "\"okay\""
+                }
+            }
+        },
+        "kernel": [
+            "CONFIG_SUPPORT_ISP_TDM=y",
+            "CONFIG_TDM_LBC_EN=y",
+            "CONFIG_D3D_COMPRESS_EN=y",
+            "CONFIG_SENSOR_GC2083_MIPI=m",
+            "CONFIG_SENSOR_GC2083_MIPI_USE_SAME_TWI=y",
+            "CONFIG_SENSOR_GC2083_VC_MIPI=y",
+            "CONFIG_SENSOR_GC2083_VC_ONE_LANE_MIPI=y",
+            "CONFIG_SENSOR_GC2083_VC_VSYNC_MODE=y",
+            "CONFIG_SENSOR_GC2083_VC_MIPI_USE_SAME_TWI=y",
+            "CONFIG_SENSOR_GC2083_ONE_LANE_MIPI=y",
+            "CONFIG_FRAMEDONE_TWO_BUFFER=y",
+            "CONFIG_TDM_VC_SWITCH_MODE=y",
+            "# CONFIG_SENSOR_GC4663 is not set"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_kmod-sunxi-vin=y",
+            "CONFIG_PACKAGE_kmod-sensor-gc2083=y",
+            "CONFIG_PACKAGE_kmod-sensor-gc2083_vc=y",
+            "# CONFIG_PACKAGE_kmod-sensor-gc4663 is not set",
+            "CONFIG_gc2083=y",
+            "# CONFIG_gc4663 is not set"
+        ]
+    },
+    "disable_display_support": {
+        "desc": "Disable drm and display support",
+        "board.dts": {
+            "set_property": {
+                "backlight0": {
+                    "status": "\"disabled\""
+                },
+                "rgb_panel0": {
+                    "status": "\"disabled\""
+                },
+                "de": {
+                    "status": "\"disabled\""
+                },
+                "vo0": {
+                    "status": "\"disabled\""
+                },
+                "dlcd0": {
+                    "status": "\"disabled\""
+                },
+                "rgb0": {
+                    "status": "\"disabled\""
+                }
+            }
+        },
+        "kernel": [
+            "# CONFIG_AW_DRM is not set",
+            "# CONFIG_AW_DRM_RGB is not set",
+            "# CONFIG_PANEL_RGB_GENERAL is not set",
+            "# CONFIG_DRM is not set",
+            "# CONFIG_FB is not set",
+            "# CONFIG_VGA_CONSOLE is not set"
+        ]
+    },
+    "v861_bga_perf1_gmac": {
+        "desc": "set v861 gmac for bga_perf1",
+        "tag": "system",
+        "board.dts": {
+            "set_property": {
+                "rgb0": {
+                    "status": "\"disabled\""
+                },
+                "i2s0_plat": {
+                    "status": "\"disabled\""
+                },
+                "rfkill": {
+                    "status": "\"disabled\""
+                },
+                "btlpm": {
+                    "status": "\"disabled\""
+                },
+                "mdio0": {
+                    "status": "\"okay\""
+                },
+                "gmac0": {
+                    "status": "\"okay\""
+                }
+            }
+        },
+        "kernel": [
+            "# CONFIG_AIC_WLAN_SUPPORT is not set",
+            "# CONFIG_AIC8800_WLAN_SUPPORT is not set",
+            "# CONFIG_AIC8800_BTLPM_SUPPORT is not set",
+            "# CONFIG_AW_RFKILL is not set",
+            "# CONFIG_AW_MACADDR_MGT is not set"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_ethtool=y",
+            "# CONFIG_PACKAGE_btmanager-v4.0 is not set",
+            "# CONFIG_PACKAGE_wifimanager-v2.0 is not set",
+            "# CONFIG_PACKAGE_wirelesscommon is not set",
+            "# CONFIG_PACKAGE_aic8800-firmware is not set",
+            "# CONFIG_PACKAGE_kmod-cfg80211 is not set",
+            "# CONFIG_PACKAGE_kmod-net-aic8800 is not set"
+        ]
+    },
+    "gsensor_mir3da": {
+        "desc": "enable v861 gsensor-mir3da as wakeup-source for bga-perf1",
+        "tag": "system",
+        "board.dts": {
+            "set_property": {
+                "twi3": {
+                    "status": "\"okay\""
+                },
+                "mir3da": {
+                    "status": "\"okay\"",
+                    "wakeup-source": null
+                }
+            }
+        },
+        "kernel": [
+            "CONFIG_AW_INPUT_SENSORINIT=y",
+            "CONFIG_AW_INPUT_SENSOR=y",
+            "CONFIG_SENSORS_MIR3DA=m",
+            "# CONFIG_SENSOR_MSA is not set"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_kmod-gsensor-mir3da=y"
+        ]
+    },
+    "enable_gpio_keys": {
+        "desc": "enable gpio keys to trigger suspend and as wakeup source",
+        "tag": "system",
+        "openwrt": [
+            "CONFIG_PACKAGE_powerkey=y",
+            "CONFIG_PACKAGE_getevent=y"
+        ],
+        "kernel": [
+            "CONFIG_INPUT_KEYBOARD=y",
+            "CONFIG_KEYBOARD_GPIO=y"
+        ],
+        "board.dts": {
+            "set_property": {
+                "gpio-keys": {
+                    "status": "\"okay\""
+                },
+                "sdc0": {
+                    "status": "\"disabled\""
+                }
+            }
+        }
+    },
+    "change_pmu_to_twi2": {
+        "desc": "change pmu to twi2 to enable standby for v861 bga V3.0",
+        "tag": "system",
+        "sysconfig": {
+            "twi_para": {
+                "twi_port": 2,
+                "twi_scl": "port:PE10<8><1><default><default>",
+                "twi_sda": "port:PE11<8><1><default><default>"
+            }
+        },
+        "uboot-board.dts": {
+            "del_node": [
+                {
+                    "path": "twi0",
+                    "name": "pmu0"
+                }
+            ],
+            "add_node": [
+                {
+                    "path": "twi2",
+                    "name": "pmu0: pmu@36",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "regulator0: regulators@0",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulator0",
+                    "name": "reg_axp333_dcdc1: dcdc1",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulator0",
+                    "name": "reg_axp333_dcdc2: dcdc2",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulator0",
+                    "name": "reg_axp333_dcdc3: dcdc3",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulator0",
+                    "name": "reg_axp333_aldo1: aldo1",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulator0",
+                    "name": "reg_axp333_aldo2: aldo2",
+                    "add_tail": true
+                }
+            ],
+            "set_property": {
+                "pmu0": {
+                    "compatible": "\"x-powers,axp333\"",
+                    "reg": "<0x36>",
+                    "status": "\"okay\""
+                },
+                "reg_axp333_dcdc1": {
+                    "regulator-name": "\"axp333-dcdc1\""
+                },
+                "reg_axp333_dcdc2": {
+                    "regulator-name": "\"axp333-dcdc2\""
+                },
+                "reg_axp333_dcdc3": {
+                    "regulator-name": "\"axp333-dcdc3\""
+                },
+                "reg_axp333_aldo1": {
+                    "regulator-name": "\"axp333-aldo1\""
+                },
+                "reg_axp333_aldo2": {
+                    "regulator-name": "\"axp333-aldo2\""
+                }
+            }
+        },
+        "board.dts": {
+            "del_property": {
+                "pmu_ext_irq": {
+                    "bias-pull-up": null
+                }
+            },
+            "del_node": [
+                {
+                    "path": "twi0",
+                    "name": "pmu0"
+                }
+            ],
+            "add_node": [
+                {
+                    "path": "twi2",
+                    "name": "pmu0: pmu@36",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "powerkey0: powerkey@0",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "regulators",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulators",
+                    "name": "reg_axp333_dcdc1: dcdc1",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulators",
+                    "name": "reg_axp333_dcdc2: dcdc2",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulators",
+                    "name": "reg_axp333_dcdc3: dcdc3",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulators",
+                    "name": "reg_axp333_aldo1: aldo1",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulators",
+                    "name": "reg_axp333_aldo2: aldo2",
+                    "add_tail": true
+                },
+                {
+                    "path": "regulators",
+                    "name": "reg_axp333_rtcldo: rtcldo",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "virtual-ext-dcdc1",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "virtual-ext-dcdc2",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "virtual-ext-dcdc3",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "virtual-ext-aldo1",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "virtual-ext-aldo2",
+                    "add_tail": true
+                },
+                {
+                    "path": "pmu0",
+                    "name": "virtual-ext-rtcldo",
+                    "add_tail": true
+                }
+            ],
+            "set_property": {
+                "pmu_ext_irq": {
+                    "bias-pull-down": null
+                },
+                "twi0": {
+                    "status": "\"disabled\""
+                },
+                "twi2": {
+                    "status": "\"okay\""
+                },
+                "pmu0": {
+                    "compatible": "\"x-powers,axp333\"",
+                    "reg": "<0x36>",
+                    "status": "\"okay\"",
+                    "pinctrl-0": "<&pmu_ext_irq>",
+                    "pinctrl-names": "\"default\"",
+                    "interrupt-parent": "<&rtc_pio>",
+                    "interrupts": "<PL 5 IRQ_TYPE_LEVEL_LOW>",
+                    "pmu_hot_shutdown": "<1>",
+                    "pmu_hot_shutdown_value": "<125>",
+                    "pmu_irq_wakeup": "<1>",
+                    "wakeup-source": null
+                },
+                "powerkey0": {
+                    "status": "\"okay\"",
+                    "compatible": "\"x-powers,axp2101-pek\"",
+                    "pmu_powkey_off_en": "<1>",
+                    "pmu_powkey_off_func": "<0>",
+                    "pmu_powkey_on_time": "<512>",
+                    "wakeup_rising": null,
+                    "wakeup_falling": null
+                },
+                "reg_axp333_dcdc1": {
+                    "regulator-name": "\"axp333-dcdc1\"",
+                    "regulator-min-microvolt": "<500000>",
+                    "regulator-max-microvolt": "<3400000>",
+                    "regulator-step-delay-us": "<25>",
+                    "regulator-final-delay-us": "<50>",
+                    "regulator-always-on": null
+                },
+                "reg_axp333_dcdc2": {
+                    "regulator-name": "\"axp333-dcdc2\"",
+                    "regulator-min-microvolt": "<500000>",
+                    "regulator-max-microvolt": "<1840000>",
+                    "regulator-step-delay-us": "<25>",
+                    "regulator-final-delay-us": "<50>",
+                    "regulator-always-on": null
+                },
+                "reg_axp333_dcdc3": {
+                    "regulator-name": "\"axp333-dcdc3\"",
+                    "regulator-min-microvolt": "<500000>",
+                    "regulator-max-microvolt": "<3400000>",
+                    "regulator-step-delay-us": "<25>",
+                    "regulator-final-delay-us": "<50>",
+                    "regulator-always-on": null
+                },
+                "reg_axp333_aldo1": {
+                    "regulator-name": "\"axp333-aldo1\"",
+                    "regulator-min-microvolt": "<500000>",
+                    "regulator-max-microvolt": "<3500000>",
+                    "regulator-step-delay-us": "<25>",
+                    "regulator-final-delay-us": "<50>",
+                    "regulator-always-on": null
+                },
+                "reg_axp333_aldo2": {
+                    "regulator-name": "\"axp333-aldo2\"",
+                    "regulator-min-microvolt": "<500000>",
+                    "regulator-max-microvolt": "<3500000>",
+                    "regulator-step-delay-us": "<25>",
+                    "regulator-final-delay-us": "<50>",
+                    "regulator-always-on": null
+                },
+                "reg_axp333_rtcldo": {
+                    "regulator-name": "\"axp333-rtcldo\"",
+                    "regulator-min-microvolt": "<500000>",
+                    "regulator-max-microvolt": "<1800000>",
+                    "regulator-step-delay-us": "<25>",
+                    "regulator-final-delay-us": "<50>",
+                    "regulator-always-on": null
+                },
+                "virtual-ext-dcdc1": {
+                    "compatible": "\"xpower-vregulator,dcdc1\"",
+                    "dcdc1-supply": "<&reg_axp333_dcdc1>"
+                },
+                "virtual-ext-dcdc2": {
+                    "compatible": "\"xpower-vregulator,dcdc2\"",
+                    "dcdc2-supply": "<&reg_axp333_dcdc2>"
+                },
+                "virtual-ext-dcdc3": {
+                    "compatible": "\"xpower-vregulator,dcdc3\"",
+                    "dcdc3-supply": "<&reg_axp333_dcdc3>"
+                },
+                "virtual-ext-aldo1": {
+                    "compatible": "\"xpower-vregulator,aldo1\"",
+                    "aldo1-supply": "<&reg_axp333_aldo1>"
+                },
+                "virtual-ext-aldo2": {
+                    "compatible": "\"xpower-vregulator,aldo2\"",
+                    "aldo2-supply": "<&reg_axp333_aldo2>"
+                },
+                "virtual-ext-rtcldo": {
+                    "compatible": "\"xpower-vregulator,rtcldo\"",
+                    "rtcldo-supply": "<&reg_axp333_rtcldo>"
+                }
+            }
+        }
+    },
+    "usb_test_configuration": {
+        "desc": "auto config usb test",
+        "kernel": [
+            "CONFIG_INPUT=y",
+            "CONFIG_INPUT_EVDEV=y",
+            "CONFIG_USB_MOUSE=y",
+            "CONFIG_SCSI=y",
+            "CONFIG_BLK_DEV_SD=y",
+            "CONFIG_USB_STORAGE=y",
+            "CONFIG_EXFAT_FS=y",
+            "CONFIG_USB_USBNET=y",
+            "CONFIG_MEDIA_USB_SUPPORT=y",
+            "CONFIG_USB_VIDEO_CLASS=m",
+            "CONFIG_SND_USB_AUDIO=y",
+            "CONFIG_USB_CONFIGFS_ACM=y",
+            "USB_F_MASS_STORAGE=y",
+            "CONFIG_USB_SUNXI_GADGET=y",
+            "CONFIG_USB_SUNXI_CONFIGFS_F_UVC=m",
+            "CONFIG_USB_SUNXI_CONFIGFS_F_UAC1=y",
+            "CONFIG_USB_CONFIGFS_F_HID=y"
+        ],
+        "openwrt": [
+            "CONFIG_PACKAGE_netcat=y",
+            "CONFIG_PACKAGE_MtpDaemon=y",
+            "CONFIG_MTP_USE_MTPTOOLS_CONNECT=y",
+            "CONFIG_BUSYBOX_CONFIG_UDHCPC=y",
+            "CONFIG_PACKAGE_kmod-sunxi-uvc=y",
+            "CONFIG_mpp_uvc=y",
+            "CONFIG_mpp_sample_uvcout=y",
+            "CONFIG_mpp_sample_uvcin=y",
+            "CONFIG_mpp_sample_uvc_vo=y"
+        ],
+        "board.dts": {
+            "set_property": {
+                "udc": {
+                    "aw,suspend_not_disconnect": null
+                }
+            }
+        }
+    },
+    "awcdr_app": {
+        "desc": "Config bga_perf1 for awcdr_app",
+        "tag": "mpp",
+        "depends": [
+            "dual_gc2083_sensor"
+        ],
+        "board.dts": {
+            "set_property": {
+                "size_pool_mem": {
+                    "size": "<0x0 0xC800000>"
+                },
+                "size_pool@0": {
+                    "sizes": "<0 204800>"
+                },
+                "gpadc0": {
+                    "channel_num": "<4>",
+                    "channel_select": "<0x1>",
+                    "channel_data_select": "<0x0>",
+                    "channel_compare_select": "<0x1>",
+                    "channel_cld_select": "<0x1>",
+                    "channel_chd_select": "<0x0>",
+                    "channel0_compare_lowdata": "<1200000>",
+                    "channel0_compare_higdata": "<100000>",
+                    "status": "\"okay\""
+                },
+                "twi3": {
+                    "status": "\"okay\""
+                },
+                "mir3da": {
+                    "status": "\"okay\"",
+                    "gsensor_int": "<&pio PL 5 GPIO_ACTIVE_HIGH>",
+                    "wakeup-source": null
+                },
+                "keyadc0": {
+                    "key_cnt": "<5>",
+                    "key0_vol": "<210>",
+                    "key0_val": "<KEY_VOLUMEUP>",
+                    "key1_vol": "<410>",
+                    "key1_val": "<KEY_VOLUMEDOWN>",
+                    "key2_vol": "<590>",
+                    "key2_val": "<KEY_MENU>",
+                    "key3_vol": "<750>",
+                    "key3_val": "<KEY_OK>",
+                    "key4_vol": "<880>",
+                    "key4_val": "<KEY_HOME>"
+                }
+            },
+            "add_node": [
+                {
+                    "path": "gpadc0",
+                    "name": "keyadc0",
+                    "add_tail": true
+                }
+            ]
+        },
+        "kernel": [
+            "CONFIG_AW_INPUT_SENSORINIT=y",
+            "CONFIG_AW_INPUT_SENSOR=y",
+            "CONFIG_SENSORS_MIR3DA=m",
+            "# CONFIG_SENSOR_MSA is not set",
+            "# CONFIG_AW_THS_GPADC_GET_TEMP is not set",
+            "# CONFIG_SERIO_LIBPS2 is not set"
+        ],
+        "openwrt": [
+            "CONFIG_DEBUG=y",
+            "CONFIG_PACKAGE_powerkey=y",
+            "CONFIG_PACKAGE_eyesee-apps-awcdr=y",
+            "CONFIG_mpp_external_sqlite=y",
+            "CONFIG_mpp_external_civetweb=y",
+            "CONFIG_PACKAGE_eyesee-mpp-framework=y",
+            "# CONFIG_mpp_framework_videoresizer is not set",
+            "CONFIG_PACKAGE_eyesee-mpp-framework-demo=y",
+            "# CONFIG_mpp_framework_sample is not set",
+            "CONFIG_mpp_textenc=y",
+            "CONFIG_mpp_parser_amr=y",
+            "CONFIG_mpp_parser_ape=y",
+            "CONFIG_mpp_parser_flac=y",
+            "CONFIG_mpp_parser_mpg=y",
+            "CONFIG_mpp_system_newfs_msdos=y",
+            "CONFIG_mpp_system_luaconfig=y",
+            "CONFIG_mpp_system_smartlink=y",
+            "CONFIG_LVGL8_USE_SUNXIFB_DOUBLE_BUFFER=y",
+            "CONFIG_PACKAGE_kmod-gsensor-mir3da=y",
+            "CONFIG_PACKAGE_kmod-sunxi-g2d=y",
+            "CONFIG_PACKAGE_lua=y",
+            "# CONFIG_PACKAGE_lua-examples is not set",
+            "CONFIG_PACKAGE_libbz2=y",
+            "CONFIG_PACKAGE_libsqlite3=y",
+            "CONFIG_SQLITE3_DYNAMIC_EXTENSIONS=y",
+            "CONFIG_SQLITE3_FTS3=y",
+            "CONFIG_SQLITE3_FTS4=y",
+            "CONFIG_SQLITE3_FTS5=y",
+            "CONFIG_SQLITE3_JSON1=y",
+            "CONFIG_SQLITE3_RTREE=y",
+            "# CONFIG_SQLITE3_SESSION is not set",
+            "CONFIG_PACKAGE_libblkid=y",
+            "CONFIG_PACKAGE_libjpeg-turbo=y",
+            "CONFIG_PACKAGE_liblua=y",
+            "CONFIG_PACKAGE_libpng=y",
+            "CONFIG_PACKAGE_libusb-1.0=y",
+            "CONFIG_PACKAGE_tslib=y",
+            "CONFIG_TSLIB_ENABLE_input=y",
+            "CONFIG_TSLIB_ENABLE_dejitter=y",
+            "CONFIG_TSLIB_ENABLE_linear=y",
+            "CONFIG_TSLIB_ENABLE_pthres=y",
+            "CONFIG_TSLIB_ENABLE_variance=y",
+            "CONFIG_PACKAGE_wpa-cli=y",
+            "CONFIG_PACKAGE_blkid=y",
+            "CONFIG_PACKAGE_evtest=y",
+            "CONFIG_PACKAGE_getevent=y",
+            "CONFIG_BUSYBOX_CONFIG_BLKID=y",
+            "CONFIG_BUSYBOX_CONFIG_FEATURE_BLKID_TYPE=y",
+            "CONFIG_BUSYBOX_CONFIG_VOLUMEID=y"
+        ]
+    },
+    "v881_ddr3_16x1_v10_emmc": {
+        "desc": "V881 DDR3 16x1 V10: external DDR3, SDC2 8-bit eMMC at 3.3 V, discrete 0.92 V supply",
+        "tag": "board",
+        "force_config": true,
+        "sysconfig": {
+            "target": {
+                "storage_type": 2
+            },
+            "card2_boot_para": {
+                "card_ctrl": 2,
+                "card_line": 8,
+                "card_high_speed": 1,
+                "sdc_io_1v8": 0
+            },
+            "dram_para": {
+                "dram_clk": 792
+            }
+        },
+        "partition": [
+            {
+                "name": "rootfs",
+                "size": "1048576"
+            }
+        ],
+        "env": [
+            {
+                "name": "mmc_root",
+                "val": "/dev/mmcblk0p7",
+                "method": "add"
+            },
+            {
+                "name": "sunxicmd",
+                "val": "run setargs_mmc",
+                "method": "add"
+            }
+        ],
+        "board.dts": {
+            "add_node": [
+                {
+                    "path": "/",
+                    "name": "reg_emmc_3v3: emmc-3v3"
+                },
+                {
+                    "path": "/",
+                    "name": "memory@40000000"
+                },
+                {
+                    "name": "&dram"
+                }
+            ],
+            "set_property": {
+                "memory@40000000": {
+                    "reg": "<0x0 0x40000000 0x0 0x20000000>"
+                },
+                "dram": {
+                    "dram_para00": "<792>",
+                    "dram_para01": "<3>",
+                    "dram_para02": "<0x7b6bfb>",
+                    "dram_para03": "<0x1>",
+                    "dram_para04": "<0x000010d2>",
+                    "dram_para05": "<0x00000000>",
+                    "dram_para06": "<0x1c70>",
+                    "dram_para07": "<0x2>",
+                    "dram_para08": "<0x18>",
+                    "dram_para09": "<0x0>",
+                    "dram_para10": "<0x004A2195>",
+                    "dram_para11": "<0x02423190>",
+                    "dram_para12": "<0x0008B061>",
+                    "dram_para13": "<0xB4787896>",
+                    "dram_para14": "<0x0>",
+                    "dram_para15": "<0x48484848>",
+                    "dram_para16": "<0x48>",
+                    "dram_para17": "<0x1621121e>",
+                    "dram_para18": "<0x0>",
+                    "dram_para19": "<0x0>",
+                    "dram_para20": "<0x0>",
+                    "dram_para21": "<0x00460000>",
+                    "dram_para22": "<0x00000055>",
+                    "dram_para23": "<0x34010100>"
+                },
+                "reg_emmc_3v3": {
+                    "compatible": "\"regulator-fixed\"",
+                    "regulator-name": "\"emmc-3v3\"",
+                    "regulator-min-microvolt": "<3300000>",
+                    "regulator-max-microvolt": "<3300000>",
+                    "regulator-always-on": null,
+                    "regulator-boot-on": null
+                },
+                "sdc2": {
+                    "status": "\"okay\"",
+                    "bus-width": "<8>",
+                    "max-frequency": "<50000000>",
+                    "vmmc-supply": "<&reg_emmc_3v3>",
+                    "vqmmc-supply": "<&reg_emmc_3v3>",
+                    "no-1-8-v": null
+                },
+                "sdc0": {
+                    "status": "\"disabled\""
+                },
+                "standby_param": {
+                    "status": "\"disabled\""
+                }
+            },
+            "del_property": {
+                "sdc2": {
+                    "mmc-ddr-1_8v": null,
+                    "mmc-hs200-1_8v": null,
+                    "mmc-hs400-1_8v": null,
+                    "cqe-on": null,
+                    "ctl-cmdq-md": null
+                }
+            }
+        },
+        "uboot-board.dts": {
+            "del_node": [
+                {
+                    "name": "pmu0"
+                }
+            ],
+            "set_property": {
+                "mmc2": {
+                    "status": "\"okay\"",
+                    "bus-width": "<8>",
+                    "max-frequency": "<50000000>",
+                    "sdc_io_1v8": "<0>",
+                    "non-removable": null,
+                    "no-1-8-v": null
+                },
+                "twi0": {
+                    "status": "\"disabled\""
+                }
+            },
+            "del_property": {
+                "mmc2": {
+                    "mmc-ddr-1_8v": null
+                },
+                "power_sply": {
+                    "axp333_dcdc1_vol": null,
+                    "axp333_aldo2_vol": null
+                }
+            }
+        },
+        "kernel": [
+            "CONFIG_REGULATOR_FIXED_VOLTAGE=y"
+        ]
+    }
+}

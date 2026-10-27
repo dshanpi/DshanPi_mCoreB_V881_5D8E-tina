@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# Load wifi modules....
+#
+
+MODULES_DIR="/lib/modules/`uname -r`"
+
+start() {
+	[ -f $MODULES_DIR/videobuf2-vmalloc.ko ] && insmod $MODULES_DIR/videobuf2-vmalloc.ko
+	[ -f $MODULES_DIR/uvc.ko ] && insmod $MODULES_DIR/uvc.ko
+	[ -f $MODULES_DIR/usb_sunxi_f_uvc.ko ] && insmod $MODULES_DIR/usb_sunxi_f_uvc.ko
+	[ -f $MODULES_DIR/uvcvideo.ko ] && insmod $MODULES_DIR/uvcvideo.ko
+}
+
+stop() {
+	[ -f $MODULES_DIR/uvcvideo.ko ] && rmmod $MODULES_DIR/uvcvideo.ko
+	[ -f $MODULES_DIR/usb_sunxi_f_uvc.ko ] && rmmod $MODULES_DIR/usb_sunxi_f_uvc.ko
+	[ -f $MODULES_DIR/uvc.ko ] && rmmod $MODULES_DIR/uvc.ko
+	[ -f $MODULES_DIR/videobuf2-vmalloc.ko ] && rmmod $MODULES_DIR/videobuf2-vmalloc.ko
+}
+
+case "$1" in
+	start)
+	start
+	;;
+	stop)
+	stop
+	;;
+	restart|reload)
+	stop
+	start
+	;;
+*)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

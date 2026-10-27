@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# Load wifi modules....
+#
+
+MODULES_DIR="/lib/modules/`uname -r`"
+
+start() {
+	printf "Load wifi modules\n"
+
+	[ -f $MODULES_DIR/aic8800_bsp.ko ] &&  {
+		lsmod | grep -q 'aic8800_bsp' || insmod $MODULES_DIR/aic8800_bsp.ko
+	}
+
+	[ -f $MODULES_DIR/aic8800_btlpm.ko ] &&  {
+		lsmod | grep -q 'aic8800_btlpm' || insmod $MODULES_DIR/aic8800_btlpm.ko
+	}
+
+	[ -f $MODULES_DIR/aic8800_fdrv.ko ] &&  {
+		lsmod | grep -q 'aic8800_fdrv' || insmod $MODULES_DIR/aic8800_fdrv.ko
+	}
+}
+
+stop() {
+	printf "Unload wifi modules\n"
+
+	[ -f $MODULES_DIR/aic8800_fdrv.ko ] && rmmod $MODULES_DIR/aic8800_fdrv.ko
+	[ -f $MODULES_DIR/aic8800_btlpm.ko ] && rmmod $MODULES_DIR/aic8800_btlpm.ko
+	[ -f $MODULES_DIR/aic8800_bsp.ko ] && rmmod $MODULES_DIR/aic8800_bsp.ko
+}
+
+case "$1" in
+	start)
+	start
+	;;
+	stop)
+	stop
+	;;
+	restart|reload)
+	stop
+	start
+	;;
+*)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

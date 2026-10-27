@@ -1,0 +1,5 @@
+# Generated board firmware and DT overlays
+/device/config/chips/v861/configs/DshanPi_mCoreB_V881_5D8E/bin/
+*.dtbo
+__pycache__/
+*.pyc
